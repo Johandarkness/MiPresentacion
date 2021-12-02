@@ -3,9 +3,7 @@ package miPresentacion;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class GUI_Presentacion extends JFrame {
     private JButton miFoto, miHobby, misExpectativas;
@@ -38,11 +36,11 @@ public class GUI_Presentacion extends JFrame {
         this.add(panelDatos, BorderLayout.CENTER);
 
         miFoto = new JButton("Este soy yo");
-        miFoto.addActionListener(escucha);
+        miFoto.addMouseListener(escucha);
         miHobby = new JButton("Este es mi hobby");
-        miHobby.addActionListener(escucha);
+        miHobby.addMouseListener(escucha);
         misExpectativas = new JButton("Creo que . . .");
-        misExpectativas.addActionListener(escucha);
+        misExpectativas.addKeyListener(escucha);
 
         panelBotones.add(miFoto);
         panelBotones.add(miHobby);
@@ -63,32 +61,105 @@ public class GUI_Presentacion extends JFrame {
         });
     }
 
-    private class Escucha implements ActionListener {
+    /**
+     * private class Escucha implements ActionListener {
+     * private ImageIcon image;
+     *
+     * @Override public void actionPerformed(ActionEvent e) {
+     * panelDatos.removeAll();
+     * //JOptionPane.showMessageDialog(null,"Oprimiste Boton");
+     * if (e.getSource() == miFoto) {
+     * image = new ImageIcon(getClass().getResource("/recursos/Yo.jpeg"));
+     * labelImagen.setIcon(image);
+     * panelDatos.add(labelImagen);
+     * } else {
+     * if (e.getSource() == miHobby) {
+     * image = new ImageIcon(getClass().getResource("/recursos/Hobbie.jpeg"));
+     * labelImagen.setIcon(image);
+     * panelDatos.add(labelImagen);
+     * } else {
+     * textoExpectativas.setText("Mi nombre es Johan Loaiza soy estudiante de la universidad de univalle\nen mí tiempo libre me gusta jugar videojuegos, y compartir con amigos mientras juego\ntambién soy competitivo en los juegos\n" +
+     * "También me gusta ver anime y leer manga de dichos animes");
+     * textoExpectativas.setFont(new Font("cotton_butter", Font.BOLD, 18));
+     * textoExpectativas.setBackground(null);
+     * panelDatos.add(textoExpectativas);
+     * }
+     * }
+     * revalidate();
+     * repaint();
+     * }
+     * }
+     **/
+    private class Escucha implements MouseListener, KeyListener {
         private ImageIcon image;
 
         @Override
-        public void actionPerformed(ActionEvent e) {
-            panelDatos.removeAll();
-            //JOptionPane.showMessageDialog(null,"Oprimiste Boton");
-            if (e.getSource() == miFoto) {
+        public void mouseClicked(MouseEvent e) {
+            if (e.getComponent() == miFoto && e.getClickCount() == 1) {
+                panelDatos.removeAll();
                 image = new ImageIcon(getClass().getResource("/recursos/Yo.jpeg"));
                 labelImagen.setIcon(image);
                 panelDatos.add(labelImagen);
-            } else {
-                if (e.getSource() == miHobby) {
-                    image = new ImageIcon(getClass().getResource("/recursos/Hobbie.jpeg"));
-                    labelImagen.setIcon(image);
-                    panelDatos.add(labelImagen);
-                } else {
-                    textoExpectativas.setText("Mi nombre es Johan Loaiza soy estudiante de la universidad de univalle\nen mí tiempo libre me gusta jugar videojuegos, y compartir con amigos mientras juego\ntambién soy competitivo en los juegos\n" +
-                            "También me gusta ver anime y leer manga de dichos animes");
-                    textoExpectativas.setFont(new Font("cotton_butter", Font.BOLD, 18));
-                    textoExpectativas.setBackground(null);
-                    panelDatos.add(textoExpectativas);
-                }
+
+            }
+            if (e.getComponent() == miHobby && e.getClickCount() == 2) {
+                panelDatos.removeAll();
+                image = new ImageIcon(getClass().getResource("/recursos/Hobbie.jpeg"));
+                labelImagen.setIcon(image);
+                panelDatos.add(labelImagen);
+
+            }
+
+            revalidate();
+            repaint();
+        }
+
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (e.getKeyChar() == 'm' || e.getKeyChar() == 'M') {
+                panelDatos.removeAll();
+                textoExpectativas.setText("Mi nombre es Johan Loaiza soy estudiante de la universidad de univalle\nen mí tiempo libre me gusta jugar videojuegos, y compartir con amigos mientras juego\ntambién soy competitivo en los juegos\n" +
+                        "También me gusta ver anime y leer manga de dichos animes");
+                textoExpectativas.setFont(new Font("cotton_butter", Font.BOLD, 18));
+                textoExpectativas.setBackground(null);
+                panelDatos.add(textoExpectativas);
             }
             revalidate();
             repaint();
         }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
+
     }
-}
+
+
+    }
